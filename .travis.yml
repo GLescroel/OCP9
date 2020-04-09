@@ -1,1 +1,9 @@
 language: java
+
+sudo: false
+
+before_script:
+  - cd ./src
+
+script:
+  - mvn clean package
