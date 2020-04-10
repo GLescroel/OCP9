@@ -2,8 +2,18 @@ language: java
 
 sudo: false
 
+addons:
+  sonarcloud:
+    organization: "nlco"
+#    token:
+#      secure: "**************************" # encrypted value of your token
+
 before_script:
   - cd ./src
 
 script:
-  - mvn clean validate
+  #- mvn clean validate
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=NlCO_OCP9 -Dsonar.login=2d88d4f0e2eeef807af3262bac7d4e0cfb8d37f3
+
+
