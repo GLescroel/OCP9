@@ -5,7 +5,6 @@
                            http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
     <!-- ====================   Business-Proxy   ==================== -->
-
     <!-- BusinessProxy -->
     <bean id="businessProxy"
           class="com.dummy.myerp.business.impl.BusinessProxyImpl"
