@@ -4,7 +4,7 @@ jdk:
   - openjdk8
 
 services:
-  - docker
+  - postgresql
 
 addons:
   sonarcloud:
@@ -13,16 +13,13 @@ addons:
 #      secure: "**************************" # encrypted value of your token
 
 before_script:
-  - cd ./docker/dev/
-  - docker-compose up -d
-  - cd ../../src
+  - cd ./testdb/
+  - psql -U postgres -f ./00_create_db.sql
+  - psql db_myerp -U usr_myerp -f ./01_create_schema.sql
+  - psql db_myerp -U usr_myerp -f ./02_create_tables.sql
+  - psql db_myerp -U usr_myerp -f ./21_insert_data_demo.sql
+  - cd ../src
 
 script:
-  #- mvn clean validate
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
   - mvn clean -P test-consumer,test-business org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=NlCO_OCP9 -Dsonar.login=2d88d4f0e2eeef807af3262bac7d4e0cfb8d37f3
-
-after_script:
-  - cd ../docker/dev
-  - docker-compose stop
-  - docker-compose rm -f
