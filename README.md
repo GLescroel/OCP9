@@ -1,5 +1,8 @@
 # MyERP
 
+[![Build Status](https://travis-ci.com/NlCO/OCP9.svg?branch=master)](https://travis-ci.com/NlCO/OCP9) 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=NlCO_OCP9&metric=coverage)](https://sonarcloud.io/dashboard?id=NlCO_OCP9)
+
 ## Organisation du répertoire
 
 *   `doc` : documentation
