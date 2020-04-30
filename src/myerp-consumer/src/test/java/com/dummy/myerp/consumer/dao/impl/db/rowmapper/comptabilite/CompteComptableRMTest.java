@@ -7,13 +7,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
 
 @RunWith(PowerMockRunner.class)
 public class CompteComptableRMTest {
@@ -31,10 +30,10 @@ public class CompteComptableRMTest {
         doReturn("Libelle du compte").when(resultSet).getString(anyString());
 
         //Act
-        CompteComptable compteComptable = compteComptableRM.mapRow(resultSet,1);
+        CompteComptable compteComptable = compteComptableRM.mapRow(resultSet, 1);
 
         //Assert
-        assertEquals(Integer.valueOf(123), compteComptable.getNumero());
-        assertEquals("Libelle du compte", compteComptable.getLibelle());
+        assertEquals("Test Compte Comptable Mapping Numero", Integer.valueOf(123), compteComptable.getNumero());
+        assertEquals("Test Compte Comptable Mapping Libelle", "Libelle du compte", compteComptable.getLibelle());
     }
 }

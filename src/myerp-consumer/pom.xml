@@ -82,6 +82,21 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
+
+        <!-- Ajout de PowerMockito -->
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>2.0.7</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito2</artifactId>
+            <version>2.0.7</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 
@@ -118,6 +133,7 @@
                         <configuration>
                             <includes>
                                 <include>**/*IT</include>
+                                <include>*Test*</include>
                             </includes>
                         </configuration>
                     </plugin>
@@ -165,15 +181,13 @@
                         </goals>
                         <configuration>
                             <rules>
-                                <!--
                                 <rule>
                                     <limits>
                                         <limit>
-                                            <minimum>0.9</minimum>
+                                            <minimum>0.75</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
-                                -->
                             </rules>
                         </configuration>
                     </execution>

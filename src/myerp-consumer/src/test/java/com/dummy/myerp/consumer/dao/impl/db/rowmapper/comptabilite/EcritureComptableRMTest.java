@@ -31,13 +31,12 @@ public class EcritureComptableRMTest {
     ResultSet resultSet;
 
     @Mock
-    JournalComptableDaoCache journalComptableDaoCache;
-
-    @Mock
     DaoProxy daoProxy;
 
     @Mock
     ComptabiliteDao comptabiliteDao;
+    @Mock
+    JournalComptableDaoCache journalComptableDaoCache;
 
     @InjectMocks
     EcritureComptableRM ecritureComptableRM;
@@ -55,7 +54,7 @@ public class EcritureComptableRMTest {
 
         doReturn("journal_code").when(resultSet).getString("journal_code");
         JournalComptable journalComptable = new JournalComptable();
-        when(journalComptableDaoCache.getByCode(anyString())).thenReturn(journalComptable);
+        doReturn(journalComptable).when(journalComptableDaoCache).getByCode(anyString());
 
         when(ConsumerHelper.getDaoProxy()).thenReturn(daoProxy);
         when(daoProxy.getComptabiliteDao()).thenReturn(comptabiliteDao);
@@ -64,7 +63,10 @@ public class EcritureComptableRMTest {
         EcritureComptable ecritureComptable = ecritureComptableRM.mapRow(resultSet, 1);
 
         //Assert
-        assertEquals(Integer.valueOf(123), ecritureComptable.getId());
-        assertEquals("Libelle test", ecritureComptable.getLibelle());
+        assertEquals("Test Ecriture Comptable Mapping Id", Integer.valueOf(123), ecritureComptable.getId());
+        assertEquals("Test Ecriture Comptable Mapping journal", journalComptable, ecritureComptable.getJournal());
+        assertEquals("Test Ecriture Comptable Mapping reference", "ref test", ecritureComptable.getReference());
+        assertEquals("Test Ecriture Comptable Mapping date", date, ecritureComptable.getDate());
+        assertEquals("Test Ecriture Comptable Mapping libelle", "Libelle test", ecritureComptable.getLibelle());
     }
 }
